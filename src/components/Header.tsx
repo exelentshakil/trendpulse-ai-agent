@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, Play, Clock, Sun, Moon, ShieldCheck, Building2 } from 'lucide-react';
+import { Sparkles, Play, Clock, Sun, Moon, CheckCircle2 } from 'lucide-react';
 
 interface HeaderProps {
   darkMode: boolean;
@@ -20,32 +20,8 @@ export default function Header({
 }: HeaderProps) {
   return (
     <header className="border-b border-[var(--color-border)] bg-[var(--color-panel)] py-4 transition-colors">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-3">
-        {/* Top Operational Status & Credential Strip */}
-        <div className="flex flex-wrap items-center justify-between gap-2 text-xs border-b border-[var(--color-border)] pb-2.5">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="inline-flex items-center gap-1 font-semibold text-[var(--color-text-primary)]">
-              <Building2 className="h-3.5 w-3.5 text-[var(--color-brand)]" />
-              <span>Aubrey Capital LLC</span>
-            </span>
-            <span className="text-[var(--color-text-muted)]">•</span>
-            <span className="text-[var(--color-text-secondary)]">Atlanta Workspace (EST)</span>
-            <span className="text-[var(--color-text-muted)]">•</span>
-            <span className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-2 py-0.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 font-mono">
-              <ShieldCheck className="h-3 w-3" />
-              SOC2 / HIPAA COMPLIANT
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] font-medium text-[var(--color-text-muted)] hidden md:inline">
-              Engineered by <strong className="text-[var(--color-text-primary)]">Shakil Ahmed</strong> (12+ Yrs Exp • Former Lead Engineer @ Legiit $1M ARR Command Center)
-            </span>
-          </div>
-        </div>
-
-        {/* Main Header Row */}
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between pt-1">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           {/* Brand & Identity */}
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 text-white shadow-sm">
@@ -79,7 +55,7 @@ export default function Header({
             <button
               onClick={onToggleTheme}
               aria-label="Toggle Theme"
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--color-panel-subtle)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors shrink-0 cursor-pointer"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--color-panel-subtle)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors shrink-0"
             >
               {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
