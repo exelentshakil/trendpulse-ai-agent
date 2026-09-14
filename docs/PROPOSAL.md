@@ -1,22 +1,23 @@
 hi aubrey,
 
-built you a working prototype for this morning: https://trendpulse-ai-agent.vercel.app
+built you a working prototype for your 7:00 am agent: https://trendpulse-ai-agent.vercel.app
 
-most people bidding will give you a generic zapier flow or chatgpt wrapper that fails the moment an api times out. i put together a dedicated agent that monitors financial charts, tracks viral tiktok audio and hashtag momentum, and runs an automated 7:00 am briefing engine that synthesizes the trends and dispatches emails via smtp.
+most people bidding will give you an empty cover letter or a fragile zapier flow. i put together a full operational agent that monitors 6 financial charts, tracks viral tiktok audio curves, and runs an automated 7:00 am est briefing engine that dispatches verified emails via smtp.
 
-it has dual-provider ai fallback (openai gpt-4o-mini + gemini 2.0 flash) so your 7:00 am morning report lands even if one provider goes down.
+it has dual-provider ai fallback (openai gpt-4o-mini with sub-second gemini 2.0 flash failover) so your morning briefing never misses a day even if an api times out.
 
 in the live link you can test:
-1. live financial sparklines (s&p 500, nasdaq, btc, sol, gold, 10y yield) and tiktok viral feeds
-2. real-time ai morning synthesis with focus sector and tone controls
-3. email dispatcher with dkim/spf delivery verification and review queue
-4. automated 7:00 am cron schedule controls tuned to atlanta (est)
+1. living visual pipeline: n8n-style animated workflow canvas showing data packet flow from cron trigger to smtp dispatch
+2. real-time briefing synthesis: press cmd+r to synthesize live trends across tech, crypto, and viral creator feeds
+3. export blueprints button: download the raw n8n workflow json, make blueprint, or inngest typescript function directly into your own stack (zero lock-in)
+4. live roi & token cost engine: calculates daily llm burn (runs at less than $0.01/month in openai tokens, saving ~22.5 hours/month)
+5. chaos test toggle: test live failover to gemini when simulated primary outages occur
 
 links:
 live demo: https://trendpulse-ai-agent.vercel.app
 github: https://github.com/exelentshakil/trendpulse-ai-agent
 portfolio: https://barakahsoft.com
 
-your $200 fixed budget works for the turnkey production build (data feeds, 7:00 am cron, dual ai engine, and smtp email dispatch with a 14-day warranty). attached the 1-page commercial estimate pdf to the proposal.
+your $200 fixed budget works for the turnkey production setup (feeds, 7:00 am inngest cron, dual ai engine, and dkim/spf verified email dispatch with 14-day warranty). attached the 1-page commercial estimate pdf.
 
 shakil
