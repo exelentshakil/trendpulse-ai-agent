@@ -96,3 +96,49 @@ code, kbd, samp, pre {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+
+
+/* n8n / Make.com Visual Workflow Animated Connector Keyframes */
+@keyframes flowDash {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes flowDashReverse {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 24;
+  }
+}
+
+@keyframes laserPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 6px var(--brand));
+  }
+}
+
+.animate-flow-wire {
+  stroke-dasharray: 4 4;
+  animation: flowDash 1.2s linear infinite;
+}
+
+.animate-flow-wire-fast {
+  stroke-dasharray: 6 6;
+  animation: flowDash 0.5s linear infinite;
+}
+
+.animate-laser-pulse {
+  animation: laserPulse 1.8s ease-in-out infinite;
+}

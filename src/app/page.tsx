@@ -31,6 +31,41 @@ export default function Home() {
   const [lastRunTime, setLastRunTime] = useState('07:00 AM EST Today');
   const [executionLogs, setExecutionLogs] = useState<any[]>([]);
 
+  // Hydrate persistent state from localStorage on client mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('trendpulse_demo_state_v1');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.darkMode !== undefined) setDarkMode(parsed.darkMode);
+        if (parsed.activeTab) setActiveTab(parsed.activeTab);
+        if (parsed.briefing) setBriefing(parsed.briefing);
+        if (parsed.lastRunTime) setLastRunTime(parsed.lastRunTime);
+        if (Array.isArray(parsed.executionLogs) && parsed.executionLogs.length > 0) {
+          setExecutionLogs(parsed.executionLogs);
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to hydrate state from localStorage:', e);
+    }
+  }, []);
+
+  // Persist state across reloads so client changes never disappear
+  useEffect(() => {
+    try {
+      const stateToSave = {
+        darkMode,
+        activeTab,
+        briefing,
+        lastRunTime,
+        executionLogs,
+      };
+      localStorage.setItem('trendpulse_demo_state_v1', JSON.stringify(stateToSave));
+    } catch (e) {
+      // Ignore storage errors in private browsing
+    }
+  }, [darkMode, activeTab, briefing, lastRunTime, executionLogs]);
+
   // Sync dark class on html
   useEffect(() => {
     if (darkMode) {
