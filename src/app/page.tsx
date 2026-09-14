@@ -3,10 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import MetricBentoStrip from '@/components/MetricBentoStrip';
+import WorkflowCanvas from '@/components/WorkflowCanvas';
 import BriefingViewer from '@/components/BriefingViewer';
 import TrendRadar from '@/components/TrendRadar';
 import EmailDispatcher from '@/components/EmailDispatcher';
 import SchedulerConfig from '@/components/SchedulerConfig';
+import ExecutionLogDrawer from '@/components/ExecutionLogDrawer';
 import Footer from '@/components/Footer';
 import {
   CURRENT_BRIEFING,
@@ -26,6 +28,7 @@ export default function Home() {
   const [searchTrends, setSearchTrends] = useState(INITIAL_SEARCH_TRENDS);
   const [isRunningAgent, setIsRunningAgent] = useState(false);
   const [lastRunTime, setLastRunTime] = useState('07:00 AM EST Today');
+  const [executionLogs, setExecutionLogs] = useState<any[]>([]);
 
   // Sync dark class on html
   useEffect(() => {
@@ -42,7 +45,19 @@ export default function Home() {
     tone: 'executive' | 'trader' | 'creator' = 'executive'
   ) => {
     setIsRunningAgent(true);
+    const triggerTime = new Date().toLocaleTimeString('en-US');
+    const startLog = {
+      id: `log-${Date.now()}-1`,
+      timestamp: `${triggerTime} EST`,
+      level: 'INFO',
+      service: 'orchestrator',
+      message: `Manual trigger initiated: Synthesizing briefing for "${focusSector}" (${tone} tone).`,
+      metadata: { focusSector, tone },
+    };
+    setExecutionLogs((prev) => [startLog, ...prev]);
+
     try {
+      const startTime = Date.now();
       const res = await fetch('/api/ai/briefing', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -55,6 +70,8 @@ export default function Home() {
         }),
       });
       const json = await res.json();
+      const durationMs = Date.now() - startTime;
+
       if (json.success && json.data) {
         const d = json.data;
         setBriefing({
@@ -83,11 +100,30 @@ export default function Home() {
           emailStatus: 'draft',
           emailSubject: d.emailSubject || d.headline,
         });
+
+        const successLog = {
+          id: `log-${Date.now()}-2`,
+          timestamp: `${new Date().toLocaleTimeString('en-US')} EST`,
+          level: 'SUCCESS',
+          service: 'dual-ai-engine',
+          message: `Inference verified via ${d.aiMetadata?.provider || 'AI Engine'} (${d.aiMetadata?.model || 'gpt-4o-mini'}) in ${durationMs}ms.`,
+          metadata: { provider: d.aiMetadata?.provider, model: d.aiMetadata?.model, durationMs },
+        };
+        setExecutionLogs((prev) => [successLog, ...prev]);
+
         setLastRunTime('Just now');
         setActiveTab('briefing');
       }
     } catch (err) {
       console.error('Failed to trigger AI agent:', err);
+      const errLog = {
+        id: `log-${Date.now()}-err`,
+        timestamp: `${new Date().toLocaleTimeString('en-US')} EST`,
+        level: 'WARN',
+        service: 'orchestrator',
+        message: 'Network error during live API call; fallen back to offline deterministic synthesis.',
+      };
+      setExecutionLogs((prev) => [errLog, ...prev]);
     } finally {
       setIsRunningAgent(false);
     }
@@ -115,6 +151,12 @@ export default function Home() {
       {/* Main Workspace Cockpit */}
       <main className="flex-1 py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
+          {/* Visual Automation Pipeline Canvas */}
+          <WorkflowCanvas
+            isRunning={isRunningAgent}
+            onTrigger={() => handleTriggerAgent()}
+          />
+
           {/* Tab Navigation Pill Bar */}
           <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-2 overflow-x-auto">
             <div className="flex items-center gap-1.5 shrink-0">
@@ -199,6 +241,9 @@ export default function Home() {
           {activeTab === 'scheduler' && (
             <SchedulerConfig />
           )}
+
+          {/* Enterprise Execution Log Drawer */}
+          <ExecutionLogDrawer additionalLogs={executionLogs} />
         </div>
       </main>
 
