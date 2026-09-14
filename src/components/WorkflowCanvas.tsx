@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import BlueprintExporter from '@/components/BlueprintExporter';
 import {
   Clock,
   Network,
@@ -17,6 +18,7 @@ import {
   Terminal,
   RefreshCw,
   Layers,
+  Workflow,
   Activity,
 } from 'lucide-react';
 
@@ -212,6 +214,8 @@ export default function WorkflowCanvas({ isRunning, onTrigger }: WorkflowCanvasP
   const [currentStepIndex, setCurrentStepIndex] = useState<number | null>(null);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [selectedNodeIndex, setSelectedNodeIndex] = useState<number | null>(null);
+  const [showExporter, setShowExporter] = useState(false);
+  const [chaosMode, setChaosMode] = useState(false);
   const [elapsedSimulationMs, setElapsedSimulationMs] = useState(0);
   const [isLocalRunning, setIsLocalRunning] = useState(false);
   const timerRef = useRef<any>(null);
@@ -300,8 +304,36 @@ export default function WorkflowCanvas({ isRunning, onTrigger }: WorkflowCanvasP
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
+          {/* Chaos Engineering Toggle */}
           <button
-            onClick={() => setSelectedNodeIndex(selectedNodeIndex !== null ? null : 2)}
+            onClick={() => setChaosMode(!chaosMode)}
+            className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-mono font-semibold transition-all cursor-pointer whitespace-nowrap ${
+              chaosMode
+                ? 'border-amber-500 bg-amber-500/10 text-amber-500'
+                : 'border-[var(--color-border)] bg-[var(--color-panel-subtle)] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]'
+            }`}
+            title="Simulate OpenAI API outage to test sub-second failover to Google Gemini"
+          >
+            <Zap className={`h-3 w-3 ${chaosMode ? 'text-amber-500 fill-current' : ''}`} />
+            <span>{chaosMode ? 'Chaos Mode: ON' : 'Chaos Test'}</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setShowExporter(!showExporter);
+              if (!showExporter) setSelectedNodeIndex(null);
+            }}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-panel-subtle)] hover:bg-[var(--color-border)]/50 px-3 py-1.5 text-xs font-semibold text-[var(--color-text-primary)] transition-all cursor-pointer whitespace-nowrap"
+          >
+            <Workflow className="h-3.5 w-3.5 text-[var(--color-brand)]" />
+            <span>{showExporter ? 'Hide Blueprints' : 'Export Blueprints'}</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setSelectedNodeIndex(selectedNodeIndex !== null ? null : 2);
+              if (selectedNodeIndex === null) setShowExporter(false);
+            }}
             className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-panel-subtle)] hover:bg-[var(--color-border)]/50 px-3 py-1.5 text-xs font-semibold text-[var(--color-text-primary)] transition-all cursor-pointer whitespace-nowrap"
           >
             <Layers className="h-3.5 w-3.5 text-[var(--color-brand)]" />
@@ -483,6 +515,13 @@ export default function WorkflowCanvas({ isRunning, onTrigger }: WorkflowCanvasP
             );
           })}
         </div>
+
+        {/* Blueprint Exporter Modal/Section */}
+        {showExporter && (
+          <div className="mt-5 animate-in fade-in slide-in-from-top-2">
+            <BlueprintExporter />
+          </div>
+        )}
 
         {/* Selected Node Telemetry & Schema Inspector Panel */}
         {selectedNodeIndex !== null && (

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import RoiCostCalculator from '@/components/RoiCostCalculator';
 import {
   Clock,
   Settings,
@@ -281,6 +282,9 @@ export default function SchedulerConfig() {
           </div>
         </div>
       </div>
+
+      {/* Operational ROI & Unit Economics Calculator */}
+      <RoiCostCalculator />
     </div>
   );
 }
