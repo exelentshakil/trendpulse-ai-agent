@@ -112,7 +112,7 @@ export default function EmailDispatcher({ briefing }: EmailDispatcherProps) {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--color-border)] pb-4">
           <div>
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--color-brand)]/10 text-[var(--color-brand)]">
                 <Mail className="h-4 w-4" />
               </div>
               <h3 className="text-sm sm:text-base font-bold text-[var(--color-text-primary)]">
@@ -149,7 +149,7 @@ export default function EmailDispatcher({ briefing }: EmailDispatcherProps) {
           {selectedGroup.emails.map((email) => (
             <span
               key={email}
-              className="rounded-md bg-sky-500/10 px-2.5 py-1 text-xs font-mono font-medium text-sky-600 dark:text-sky-400 border border-sky-500/20 whitespace-nowrap shrink-0"
+              className="rounded-md bg-[var(--color-brand)]/10 px-2.5 py-1 text-xs font-mono font-medium text-[var(--color-brand)] border border-[var(--color-brand)]/20 whitespace-nowrap shrink-0"
             >
               {email}
             </span>
@@ -204,7 +204,7 @@ export default function EmailDispatcher({ briefing }: EmailDispatcherProps) {
             {/* Rendered Email Body */}
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-4 text-xs sm:text-sm leading-relaxed space-y-4">
               <div className="border-b border-[var(--color-border)] pb-3">
-                <div className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+                <div className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand)]">
                   TrendPulse AI • Morning Intelligence
                 </div>
                 <h4 className="mt-1 text-sm sm:text-base font-bold text-[var(--color-text-primary)]">
@@ -255,7 +255,7 @@ export default function EmailDispatcher({ briefing }: EmailDispatcherProps) {
         <div className="lg:col-span-5 space-y-6">
           {/* AI Refinement Box */}
           <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-panel)] p-5 shadow-xs">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--color-brand)]">
               <Sparkles className="h-3.5 w-3.5" />
               <span>AI Email Copy Refiner</span>
             </div>

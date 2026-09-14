@@ -344,12 +344,12 @@ Return JSON with this exact schema:
         previewSnippet: 'Today\'s 7:00 AM market charts, TikTok viral audio, and executive action plan.',
         htmlBody: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #0f172a; line-height: 1.5; max-width: 600px;">
-            <div style="border-bottom: 2px solid #0284c7; padding-bottom: 12px; margin-bottom: 20px;">
+            <div style="border-bottom: 2px solid #059669; padding-bottom: 12px; margin-bottom: 20px;">
               <h2 style="margin: 0; color: #0f172a; font-size: 18px;">TrendPulse AI • Morning Intelligence Digest</h2>
               <p style="margin: 4px 0 0 0; color: #64748b; font-size: 13px;">Automated 7:00 AM Briefing • ${new Date().toLocaleDateString()}</p>
             </div>
             <p style="font-size: 14px; font-weight: 500; background: #f1f5f9; padding: 12px; border-radius: 8px;">${params.briefing?.executiveSummary || 'Executive market and social intelligence summary.'}</p>
-            <h3 style="font-size: 15px; margin-top: 20px; color: #0284c7;">Key Action Items Today:</h3>
+            <h3 style="font-size: 15px; margin-top: 20px; color: #059669;">Key Action Items Today:</h3>
             <ul>
               ${(params.briefing?.actionItems || []).map((a: any) => `<li style="font-size: 13px; margin-bottom: 6px;"><strong>[${a.priority || 'High'}]</strong> ${a.task}</li>`).join('')}
             </ul>

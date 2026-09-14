@@ -146,7 +146,7 @@ export default function ExecutionLogDrawer({ additionalLogs = [] }: ExecutionLog
                   <span className="text-slate-500 text-[11px] shrink-0">{log.timestamp}</span>
                   <span
                     className={`text-[11px] font-bold shrink-0 ${
-                      log.level === 'SUCCESS' ? 'text-emerald-400' : 'text-sky-400'
+                      log.level === 'SUCCESS' ? 'text-emerald-400' : 'text-cyan-400'
                     }`}
                   >
                     [{log.service.toUpperCase()}]

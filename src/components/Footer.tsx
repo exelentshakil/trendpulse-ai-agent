@@ -20,7 +20,7 @@ export default function Footer() {
             {/* Card 1 */}
             <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-panel-subtle)] p-4">
               <div className="flex items-center gap-2 text-xs font-bold text-[var(--color-text-primary)]">
-                <Cpu className="h-4 w-4 text-sky-500" />
+                <Cpu className="h-4 w-4 text-emerald-500" />
                 <span>Dual-Provider AI Failover</span>
               </div>
               <p className="mt-2 text-xs text-[var(--color-text-muted)] leading-relaxed">

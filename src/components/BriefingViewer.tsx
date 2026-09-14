@@ -47,7 +47,7 @@ export default function BriefingViewer({
       <div className="flex flex-col gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-panel)] p-5 shadow-xs sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="rounded-md bg-sky-500/10 px-2.5 py-1 text-xs font-semibold text-sky-600 dark:text-sky-400 font-mono whitespace-nowrap shrink-0">
+            <span className="rounded-md bg-[var(--color-brand)]/10 px-2.5 py-1 text-xs font-semibold text-[var(--color-brand)] font-mono whitespace-nowrap shrink-0">
               {briefing.formattedDate}
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--color-panel-subtle)] px-2.5 py-1 text-xs font-medium text-[var(--color-text-secondary)] whitespace-nowrap shrink-0">
@@ -85,10 +85,10 @@ export default function BriefingViewer({
 
       {/* AI Synthesis Config Panel (Collapsible) */}
       {showConfig && (
-        <div className="rounded-xl border border-sky-500/30 bg-sky-500/5 p-4 transition-all">
+        <div className="rounded-xl border border-[var(--color-brand)]/30 bg-[var(--color-brand)]/5 p-4 transition-all">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-sky-700 dark:text-sky-300">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand)]">
                 On-Demand AI Synthesis Parameters
               </h4>
               <p className="text-xs text-[var(--color-text-muted)]">
@@ -129,7 +129,7 @@ export default function BriefingViewer({
               <button
                 onClick={() => onRegenerate(selectedFocus, selectedTone)}
                 disabled={isRegenerating}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white px-3 py-1.5 text-xs font-semibold shadow-xs disabled:opacity-50 cursor-pointer shrink-0"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] text-white px-3 py-1.5 text-xs font-semibold shadow-xs disabled:opacity-50 cursor-pointer shrink-0"
               >
                 {isRegenerating ? (
                   <>
@@ -165,7 +165,7 @@ export default function BriefingViewer({
         <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-panel)] p-5 shadow-xs">
           <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
             <div className="flex items-center gap-2">
-              <div className="flex h-6 w-6 items-center justify-center rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400">
+              <div className="flex h-6 w-6 items-center justify-center rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                 <TrendingUp className="h-3.5 w-3.5" />
               </div>
               <h3 className="text-sm font-bold text-[var(--color-text-primary)]">
@@ -241,7 +241,7 @@ export default function BriefingViewer({
                   {signal.metric}
                 </p>
                 <div className="mt-2 rounded-md bg-[var(--color-panel)] p-2.5 border border-[var(--color-border)]">
-                  <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 block mb-0.5">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand)] block mb-0.5">
                     Recommended Action:
                   </span>
                   <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">

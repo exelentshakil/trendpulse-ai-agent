@@ -48,7 +48,7 @@ export default function TrendRadar({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--color-border)] pb-4">
           <div>
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                 <BarChart3 className="h-4 w-4" />
               </div>
               <h3 className="text-sm sm:text-base font-bold text-[var(--color-text-primary)]">
@@ -154,7 +154,7 @@ export default function TrendRadar({
                 {/* Market Signal Pill */}
                 <div className="mt-3 border-t border-[var(--color-border)] pt-2 flex items-center justify-between text-xs">
                   <span className="text-[var(--color-text-muted)] font-medium">Signal:</span>
-                  <span className="font-semibold text-sky-600 dark:text-sky-400 truncate ml-2">
+                  <span className="font-semibold text-[var(--color-brand)] truncate ml-2">
                     {ticker.signal}
                   </span>
                 </div>
@@ -224,7 +224,7 @@ export default function TrendRadar({
                   <span className="font-semibold text-[var(--color-text-muted)]">Viral Hook: </span>
                   <span className="text-[var(--color-text-secondary)]">{trend.keyHook}</span>
                 </div>
-                <div className="rounded-md bg-sky-500/5 p-2 border border-sky-500/20 text-sky-700 dark:text-sky-300">
+                <div className="rounded-md bg-rose-500/5 p-2 border border-rose-500/20 text-rose-700 dark:text-rose-300">
                   <span className="font-bold">Content Action: </span>
                   {trend.actionableAngle}
                 </div>
@@ -257,7 +257,7 @@ export default function TrendRadar({
               className="rounded-xl border border-[var(--color-border)] bg-[var(--color-panel-subtle)] p-4"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-sky-600 dark:text-sky-400">
+                <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400">
                   {st.source}
                 </span>
                 <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">

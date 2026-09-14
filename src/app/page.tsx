@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/Header';
+import MarketTickerBar from '@/components/MarketTickerBar';
 import MetricBentoStrip from '@/components/MetricBentoStrip';
 import WorkflowCanvas from '@/components/WorkflowCanvas';
 import BriefingViewer from '@/components/BriefingViewer';
@@ -40,10 +41,11 @@ export default function Home() {
   }, [darkMode]);
 
   // Real AI Agent Synthesis Trigger
-  const handleTriggerAgent = async (
+  const handleTriggerAgent = useCallback(async (
     focusSector: string = 'Tech Equities & Viral TikTok SaaS',
     tone: 'executive' | 'trader' | 'creator' = 'executive'
   ) => {
+    if (isRunningAgent) return;
     setIsRunningAgent(true);
     const triggerTime = new Date().toLocaleTimeString('en-US');
     const startLog = {
@@ -127,7 +129,34 @@ export default function Home() {
     } finally {
       setIsRunningAgent(false);
     }
-  };
+  }, [briefing, isRunningAgent, tickers, tiktokTrends, searchTrends]);
+
+  // Global Keyboard Shortcuts (Linear & Raycast Power-User Style)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore when typing inside input or textarea
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT') {
+        return;
+      }
+
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'r') {
+        e.preventDefault();
+        handleTriggerAgent();
+      } else if (e.key === '1') {
+        setActiveTab('briefing');
+      } else if (e.key === '2') {
+        setActiveTab('radar');
+      } else if (e.key === '3') {
+        setActiveTab('email');
+      } else if (e.key === '4') {
+        setActiveTab('scheduler');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleTriggerAgent]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--color-bg)]">
@@ -139,6 +168,9 @@ export default function Home() {
         onTriggerAgent={() => handleTriggerAgent()}
         lastRunTime={lastRunTime}
       />
+
+      {/* Real-Time Market & TikTok Ticker Tape Bar */}
+      <MarketTickerBar />
 
       {/* High-Level Bento KPI Strip */}
       <MetricBentoStrip
@@ -157,7 +189,7 @@ export default function Home() {
             onTrigger={() => handleTriggerAgent()}
           />
 
-          {/* Tab Navigation Pill Bar */}
+          {/* Tab Navigation Pill Bar with Keyboard Shortcut Hints */}
           <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-2 overflow-x-auto">
             <div className="flex items-center gap-1.5 shrink-0">
               <button
@@ -169,7 +201,12 @@ export default function Home() {
                 }`}
               >
                 <Sparkles className="h-4 w-4" />
-                <span>Morning Executive Briefing</span>
+                <span>Morning Briefing</span>
+                <kbd className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                  activeTab === 'briefing' ? 'bg-white/20 text-white' : 'bg-[var(--color-panel-subtle)] text-[var(--color-text-muted)] border border-[var(--color-border)]'
+                }`}>
+                  1
+                </kbd>
               </button>
 
               <button
@@ -181,7 +218,12 @@ export default function Home() {
                 }`}
               >
                 <TrendingUp className="h-4 w-4" />
-                <span>Live Trend Feeds & Charts</span>
+                <span>Live Feeds & Charts</span>
+                <kbd className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                  activeTab === 'radar' ? 'bg-white/20 text-white' : 'bg-[var(--color-panel-subtle)] text-[var(--color-text-muted)] border border-[var(--color-border)]'
+                }`}>
+                  2
+                </kbd>
               </button>
 
               <button
@@ -193,7 +235,12 @@ export default function Home() {
                 }`}
               >
                 <Mail className="h-4 w-4" />
-                <span>Email Dispatcher & Review</span>
+                <span>Email Review & Dispatch</span>
+                <kbd className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                  activeTab === 'email' ? 'bg-white/20 text-white' : 'bg-[var(--color-panel-subtle)] text-[var(--color-text-muted)] border border-[var(--color-border)]'
+                }`}>
+                  3
+                </kbd>
               </button>
 
               <button
@@ -205,14 +252,20 @@ export default function Home() {
                 }`}
               >
                 <Settings className="h-4 w-4" />
-                <span>Agent Schedule & Controls</span>
+                <span>Schedule & Controls</span>
+                <kbd className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                  activeTab === 'scheduler' ? 'bg-white/20 text-white' : 'bg-[var(--color-panel-subtle)] text-[var(--color-text-muted)] border border-[var(--color-border)]'
+                }`}>
+                  4
+                </kbd>
               </button>
             </div>
 
             <div className="hidden md:flex items-center gap-2 text-xs text-[var(--color-text-muted)] font-mono">
-              <span>Status: Synchronized</span>
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              <span>TERMINAL TELEMETRY</span>
               <span>•</span>
-              <span>Atlanta (EST)</span>
+              <span>ATLANTA (EST)</span>
             </div>
           </div>
 

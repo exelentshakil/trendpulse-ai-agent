@@ -35,8 +35,8 @@ export default function WorkflowCanvas({ isRunning, onTrigger }: WorkflowCanvasP
       desc: 'gpt-4o-mini reasoning with sub-second Gemini failover',
       icon: Cpu,
       status: 'OPERATIONAL',
-      badgeColor: 'text-sky-500 bg-sky-500/10 border-sky-500/20',
-      nodeColor: 'border-sky-500/40 hover:border-sky-500',
+      badgeColor: 'text-violet-500 bg-violet-500/10 border-violet-500/20',
+      nodeColor: 'border-violet-500/40 hover:border-violet-500',
     },
     {
       id: 'guardrail',
@@ -66,8 +66,8 @@ export default function WorkflowCanvas({ isRunning, onTrigger }: WorkflowCanvasP
             <h3 className="text-sm sm:text-base font-bold text-[var(--color-text-primary)]">
               Automated Agent Pipeline Architecture
             </h3>
-            <span className="inline-flex items-center gap-1 rounded-full border border-sky-500/20 bg-sky-500/10 px-2 py-0.5 text-xs font-semibold text-sky-600 dark:text-sky-400 whitespace-nowrap shrink-0">
-              <span className="h-1.5 w-1.5 rounded-full bg-sky-500 animate-pulse" />
+            <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 font-mono whitespace-nowrap shrink-0">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Durable Execution
             </span>
           </div>
@@ -104,7 +104,7 @@ export default function WorkflowCanvas({ isRunning, onTrigger }: WorkflowCanvasP
               <div
                 className={`flex-1 rounded-xl border bg-[var(--color-panel-subtle)] p-3.5 transition-all ${
                   step.nodeColor
-                } ${isRunning ? 'ring-1 ring-sky-500/30' : ''}`}
+                } ${isRunning ? 'ring-2 ring-[var(--color-brand)]/30' : ''}`}
               >
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--color-panel)] border border-[var(--color-border)] text-[var(--color-brand)] shadow-xs">

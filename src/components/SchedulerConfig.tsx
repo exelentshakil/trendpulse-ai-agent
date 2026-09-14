@@ -65,7 +65,7 @@ export default function SchedulerConfig() {
       {/* Top Banner */}
       <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-panel)] p-5 shadow-xs">
         <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--color-brand)]/10 text-[var(--color-brand)]">
             <Settings className="h-4 w-4" />
           </div>
           <div>
@@ -84,7 +84,7 @@ export default function SchedulerConfig() {
         <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-panel)] p-5 shadow-xs space-y-5">
           <div className="border-b border-[var(--color-border)] pb-3">
             <h4 className="text-sm font-bold text-[var(--color-text-primary)] flex items-center gap-2">
-              <Clock className="h-4 w-4 text-sky-500" />
+              <Clock className="h-4 w-4 text-[var(--color-brand)]" />
               <span>Daily Morning Execution Schedule</span>
             </h4>
             <p className="mt-1 text-xs text-[var(--color-text-muted)]">
@@ -214,7 +214,7 @@ export default function SchedulerConfig() {
             {/* OpenAI Status */}
             <div className="flex items-center justify-between rounded-lg border border-[var(--color-border)] bg-[var(--color-panel-subtle)] p-3">
               <div className="flex items-center gap-2.5">
-                <Cpu className="h-4 w-4 text-sky-500" />
+                <Cpu className="h-4 w-4 text-emerald-500" />
                 <div>
                   <span className="font-bold text-[var(--color-text-primary)] block">
                     Primary AI: OpenAI gpt-4o-mini
